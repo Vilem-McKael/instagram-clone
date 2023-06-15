@@ -14,9 +14,14 @@ export default function Register() {
 
     async function onSignUp() {
         const { name, email, password } = credentials;
-        const auth = getAuth
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((res) => {
+            firebase.firestore().collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+                name,
+                email
+            })
             console.log(res)
         })
         .catch((error) => {

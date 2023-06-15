@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 // import firebase from 'firebase/compat/app';
-// import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+// import { , createUserWithEmailAndPassword } from 'firebase/auth';
 
 import firebase from 'firebase/compat';
 require('firebase/auth');
