@@ -1,6 +1,9 @@
 import { View, Text, Button, TextInput } from 'react-native'
 import React, { useState } from 'react'
 
+import firebase from 'firebase/compat'
+require('firebase/auth')
+
 export default function Register() {
 
     const [credentials, setCredentials] = useState({
@@ -9,8 +12,16 @@ export default function Register() {
         password: '',
     })
 
-    function handleSignUp() {
-        console.log(credentials)
+    async function onSignUp() {
+        const { name, email, password } = credentials;
+        const auth = getAuth
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
   return (
@@ -18,6 +29,7 @@ export default function Register() {
       <TextInput 
         placeholder="name"
         autoCompleteType="off"
+        autoCapitalize='none'
         value={credentials.name}
         onChangeText={(name) => setCredentials({...credentials, 'name': name})}
       />
@@ -30,13 +42,13 @@ export default function Register() {
       />
       <TextInput
         placeholder="password"
-        secureTextEntry={false}
+        secureTextEntry={true}
         value={credentials.password}
         onChangeText={(password) => setCredentials({...credentials, 'password': password})}
       />
       <Button 
         title='Sign Up'
-        onPress={handleSignUp}
+        onPress={onSignUp}
       />
     </View>
     
